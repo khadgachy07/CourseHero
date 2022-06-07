@@ -8,5 +8,11 @@ module.exports = {
       },
     },
   },
+  variants: {
+    extend: {
+      opaciy: ["disabled"],
+      cursor: ["disabled"],
+    },
+  },
   plugins: [],
 }
