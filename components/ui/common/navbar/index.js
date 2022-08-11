@@ -38,10 +38,16 @@ export default function Navbar() {
               {isLoading ? (
                 <Button disabled={true} onClick={connect}>
                   Loading...
-                </Button> 
+                </Button>
               ) : isWeb3Loaded ? (
                 account.data ? (
-                  <Button hoverable={false} className="cursor-default" variant="red">Hi There!</Button>
+                  <Button
+                    hoverable={false}
+                    className="cursor-default"
+                    variant="red"
+                  >
+                    Hi There! { account.isAdmin && "Admin"}
+                  </Button>
                 ) : (
                   <Button onClick={connect}>Connect</Button>
                 )
@@ -56,14 +62,13 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
-     { account.data &&
-      <div className="flex justify-end pt-1 sm:px-6 lg:px-8">
-        <div className="text-white bg-indigo-600 rounded-md p-2">
-        {account.data}
+      {account.data && (
+        <div className="flex justify-end pt-1 sm:px-6 lg:px-8">
+          <div className="text-white bg-indigo-600 rounded-md p-2">
+            {account.data}
+          </div>
         </div>
-        
-      </div>
-      }
+      )}
     </section>
   );
 }
