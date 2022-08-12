@@ -1,11 +1,12 @@
-export default function WalletBar({address}) {
+
+export default function WalletBar({address,network}) {
   return (
     <section className="text-white bg-indigo-600">
       <div className="p-8">
         <h1 className="text-2xl">
-          Hello, {address}
+          Hello, {address? address: "Visitor" } 
         </h1>
-        <h2 className="subtitle mb-5 text-xl">
+        <h2 className="subtitle mb-5 text-xl"> 
           I hope you are having a great day!
         </h2>
         <div className="flex justify-between items-center">
@@ -22,7 +23,7 @@ export default function WalletBar({address}) {
           <div>
             <div>
               <span>Currently on </span>
-              <strong className="text-2xl">Ethereum Main Network</strong>
+              <strong className="text-2xl">{address? network : "Not Any Network"}</strong>
             </div> 
           </div>
         </div>
