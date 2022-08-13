@@ -1,26 +1,30 @@
 import { BaseLayout } from "@components/ui/layout";
-import { CourseList } from "@components/ui/course"
-import {  Hero } from "@components/ui/common";
+import { CourseCard, CourseList } from "@components/ui/course";
+import { Hero } from "@components/ui/common";
 import { getAllCourses } from "@content/courses/fetcher";
 
-export default function Home({courses}) {
-  
+export default function Home({ courses }) {
   return (
-        <>
-            <Hero />
-            <CourseList courses={courses} />
-        </>
-       
+    <>
+      <Hero />
+      <CourseList courses={courses}>
+        {(course) => 
+          <CourseCard 
+            key={course.id} 
+            course={course} />
+        }
+      </CourseList>
+    </>
   );
 }
 
 export function getStaticProps() {
-  const {data} = getAllCourses()
-  return{
-    props : {
-      courses: data
-    }
-  }
+  const { data } = getAllCourses();
+  return {
+    props: {
+      courses: data,
+    },
+  };
 }
 
-Home.Layout = BaseLayout
+Home.Layout = BaseLayout;

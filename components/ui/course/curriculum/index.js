@@ -1,4 +1,4 @@
-export default function Curricullum({locked}) {
+export default function Curriculum({locked}) {
 
     const lectures = [
         "How to init App",
