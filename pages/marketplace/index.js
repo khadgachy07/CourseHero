@@ -1,5 +1,3 @@
-
-
 import { BaseLayout } from "@components/ui/layout";
 import { CourseCard, CourseList } from "@components/ui/course";
 import { getAllCourses } from "@content/courses/fetcher";
@@ -14,20 +12,18 @@ export default function Marketplace({ courses }) {
   return (
     <>
       <div className="py-4">
-        <WalletBar 
-          address={account.data} 
+        <WalletBar
+          address={account.data}
           network={{
-           data: network.data,
+            data: network.data,
             target: network.target,
             isSupported: network.isSupported,
-          }} 
+            hasFirstFetch: network.hasFirstFetch,
+          }}
         />
       </div>
       <CourseList courses={courses}>
-        {(course) => 
-          <CourseCard 
-          key={course.id} course={course} />
-        }
+        {(course) => <CourseCard key={course.id} course={course} />}
       </CourseList>
     </>
   );

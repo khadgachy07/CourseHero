@@ -1,12 +1,9 @@
-
-export default function WalletBar({address,network}) {
+export default function WalletBar({ address, network }) {
   return (
     <section className="text-white bg-indigo-600">
       <div className="p-8">
-        <h1 className="text-2xl">
-          Hello, {address? address: "Visitor" } 
-        </h1>
-        <h2 className="subtitle mb-5 text-xl"> 
+        <h1 className="text-2xl">Hello, {address ? address : "Visitor"}</h1>
+        <h2 className="subtitle mb-5 text-xl">
           I hope you are having a great day!
         </h2>
         <div className="flex justify-between items-center">
@@ -21,21 +18,21 @@ export default function WalletBar({address,network}) {
             </div>
           </div>
           <div>
-            { !network.isSupported &&
+            {network.hasFirstFetch && !network.isSupported && (
               <div className="bg-red-400 p-4 rounded-lg">
-              <div>Connected to wrong network</div> 
-              <div>
-                Connect to : {` `}
-                <strong className="text-2xl">
-                {network.target}
-                </strong>
+                <div>Connected to wrong network</div>
+                <div>
+                  Connect to : {` `}
+                  <strong className="text-2xl">{network.target}</strong>
+                </div>
               </div>
-            </div>
-            }
+            )}
             <div>
               <span>Currently on </span>
-              <strong className="text-2xl">{address? network.data : "Not Any Network"}</strong>
-            </div> 
+              <strong className="text-2xl">
+                {address ? network.data : "Not Any Network"}
+              </strong>
+            </div>
           </div>
         </div>
       </div>
