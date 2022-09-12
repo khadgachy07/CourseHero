@@ -6,7 +6,7 @@ export default function Button({
     ...rest
 }) {
   const variants ={
-    purplr: `text-white bg-indigo-600 ${hoverable && 'hover:bg-indigo-700'}`,
+    purple: `text-white bg-indigo-600 ${hoverable && 'hover:bg-indigo-700'}`,
     red:`text-white bg-red-600 ${hoverable && 'hover:bg-red-700'}`
   }
   return (
