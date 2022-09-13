@@ -1,4 +1,8 @@
+import { useWeb3 } from "@components/providers";
+
 export default function WalletBar({ address, network }) {
+  const { requireInstall } = useWeb3();
+
   return (
     <section className="text-white bg-indigo-600">
       <div className="p-8">
@@ -27,12 +31,17 @@ export default function WalletBar({ address, network }) {
                 </div>
               </div>
             )}
-            <div>
-              <span>Currently on </span>
-              <strong className="text-2xl">
-                {address ? network.data : "Not Any Network"}
-              </strong>
-            </div>
+            {requireInstall && (
+              <div className="bg-yellow-600 p-4 rounded-lg">
+                Cannot connect to Network. Please install metamask.
+              </div>
+            )}
+            {network.data && (
+              <div>
+                <span>Currently on </span>
+                <strong className="text-2xl">{network.data}</strong>
+              </div>
+            )}
           </div>
         </div>
       </div>
