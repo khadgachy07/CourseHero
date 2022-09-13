@@ -5,9 +5,9 @@ import { useAccount } from "@components/hooks/web3";
 import { useRouter } from "next/router";
 
 export default function Navbar() {
-  const { connect, web3, isLoading } = useWeb3();
+  const { connect, requireInstall, isLoading } = useWeb3();
   const { account } = useAccount();
-  const {pathname} = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <section>
@@ -39,35 +39,28 @@ export default function Navbar() {
               </Link>
 
               {isLoading ? (
-                <Button disabled={true} >
-                  Loading...
-                </Button>
-              ) : web3 != null ?(
-                account.data ? (
-                  <Button
-                    hoverable={false}
-                    className="cursor-default"
-                    variant="red"
-                  >
-                    Hi There! { account.isAdmin && "Admin"}
-                  </Button>
-                ) : (
-                  <Button onClick={connect}>Connect</Button>
-                )
-              ) : (
+                <Button disabled={true}>Loading...</Button>
+              ) : account.data ? (
                 <Button
-                  onClick={() => window.open("https://metamask.io/", "_blank")}
+                  hoverable={false}
+                  className="cursor-default"
+                  variant="red"
                 >
+                  Hi There! {account.isAdmin && "Admin"}
+                </Button>
+              ) : requireInstall ? (
+                <Button
+                  onClick={() => window.open("https://metamask.io/", "_blank")}>
                   Install Metamask
                 </Button>
+              ) : (
+                <Button onClick={connect}>Connect</Button>
               )}
             </div>
           </div>
         </nav>
       </div>
-      {account.data && 
-        !pathname.includes('/marketplace') &&
-      (
+      {account.data && !pathname.includes("/marketplace") && (
         <div className="flex justify-end pt-1 sm:px-6 lg:px-8">
           <div className="text-white bg-indigo-600 rounded-md p-2">
             {account.data}
