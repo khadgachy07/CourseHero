@@ -17,7 +17,7 @@ export default function Marketplace({ courses }) {
             data: network.data,
             target: network.target,
             isSupported: network.isSupported,
-            hasFirstFetch: network.hasFirstFetch,
+            hasInitialResponse: network.hasInitialResponse,
           }}
         />
       </div>

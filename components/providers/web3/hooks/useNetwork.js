@@ -31,13 +31,11 @@ export const handler = (web3, provider) => () => {
   });
 
   return {
-    network: {
+  
       data,
-      target: targetNetwork,
-      hasFirstFetch: data || error,
-      isSupported: data === targetNetwork,
       mutate,
-      ...rest,
-    },
+      target: targetNetwork,
+      isSupported: data === targetNetwork,
+      ...rest
   };
 };
