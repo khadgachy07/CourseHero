@@ -13,6 +13,9 @@ export default function Marketplace({ courses }) {
   const { account } = useAccount();
   const { network } = useNetwork();
   const {eth} = useEthPrice()
+
+  const canPurchase = !!(account.data && network.isSupported)
+  console.log(canPurchase);
  
   return (
     <>
@@ -26,16 +29,20 @@ export default function Marketplace({ courses }) {
             hasInitialResponse: network.hasInitialResponse,
           }}
         />
-        <EthRates eth={eth.data}/>
+        <EthRates 
+          eth={eth.data}
+          ethPerItem={eth.perItem}/>
       </div>
       <CourseList courses={courses}>
         {(course) => (
           <CourseCard
             key={course.id}
             course={course}
+            disabled={!canPurchase}
             Footer={() => (
               <div className="mt-4">
                 <Button 
+                  disabled={!canPurchase}
                   onClick = {() => setSelectedCourse(course)}
                   variant="lightPurple">Purchase
                 </Button>
