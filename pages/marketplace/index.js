@@ -14,7 +14,7 @@ export default function Marketplace({ courses }) {
   return (
     <>
       <MarketHeader/>  
-      <CourseList courses={courses}>
+      <CourseList courses={courses}> 
         {(course) => (
           <CourseCard
             key={course.id}

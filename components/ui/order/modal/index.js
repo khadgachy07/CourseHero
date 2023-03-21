@@ -1,14 +1,28 @@
+import { useEthPrice } from "@components/hooks/useEthPrice";
 import { Button, Modal } from "@components/ui/common";
 import { useEffect, useState } from "react";
 
+const defaultOrder = {
+  price: "",
+  email: "",
+  confirmationEmail: ""
+}
+
 export default function OrderModal({course,onClose}) {
   const [isOpen, setIsOpen] = useState(false);
+  const [order,setOrder] = useState(defaultOrder); 
+  const [enablePrice, setEnablePrice] = useState(false)
+  const {eth} = useEthPrice()
 
   useEffect(() => {
     if(!!course){
       setIsOpen(true)
+      setOrder({
+        ...defaultOrder,
+        price: eth.perItem
+      })
     }
-  },[course])
+  },[course, eth.perItem])
 
   const closeModal= () => {
     onClose()
@@ -30,6 +44,10 @@ export default function OrderModal({course,onClose}) {
                     <label className="flex items-center mr-2">
                       <input
                         type="checkbox"
+                        checked={enablePrice}
+                        onChange = { () => {
+                          setEnablePrice(true)
+                        }}
                         className="form-checkbox"
                       />
                     </label>
@@ -37,9 +55,18 @@ export default function OrderModal({course,onClose}) {
                   </div>
                 </div>
                 <input
-                  type="text"
+                  type="number"
                   name="price"
+                  disabled={!enablePrice}
+                  value= {order.price}
+                  onChange={({target: {value}}) => {
+                    setOrder({
+                      ...order,
+                      price: value
+                    })
+                  }}
                   id="price"
+                
                   className="disabled:opacity-50 w-80 mb-1 focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md"
                 />
                 <p className="text-xs text-gray-700">
