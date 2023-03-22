@@ -45,8 +45,12 @@ export default function OrderModal({course,onClose}) {
                       <input
                         type="checkbox"
                         checked={enablePrice}
-                        onChange = { () => {
-                          setEnablePrice(true)
+                        onChange = { ({target: {checked}}) => {
+                          setOrder({
+                            ...order,
+                            price: checked? order.price : eth.perItem
+                          })
+                          setEnablePrice(checked)
                         }}
                         className="form-checkbox"
                       />
